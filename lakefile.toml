@@ -1,0 +1,21 @@
+name = "Statlib"
+defaultTargets = ["Statlib"]
+version = "0.1.0"
+keywords = ["probability", "statistics", "lean"]
+packagesDir = ".lake/packages"
+
+[leanOptions]
+autoImplicit = true
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "master"
+
+[[require]]
+name = "subverso"
+git = "https://github.com/leanprover/subverso"
+rev = "main"
+
+[[lean_lib]]
+name = "Statlib"
