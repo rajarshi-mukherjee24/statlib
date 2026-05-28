@@ -1,17 +1,20 @@
-import Manual.Pages.Inference
+import Manual.Pages.Installation
+import Manual.Pages.RiskKernels
 import VersoManual
 
 open Verso.Genre Manual
 
 set_option pp.rawOnError true
 
-#doc (Manual) "Statistical Inference" =>
+#doc (Manual) "Statlib" =>
 %%%
 authors := []
-shortTitle := "Statistical Inference"
+shortTitle := "Statlib"
 %%%
 
 These tutorial pages develop the decision-theoretic setup for statistical
-inference and connect the lecture-note definitions to Lean interfaces.
+inference.
 
-{include 0 Manual.Pages.Inference}
+{include 0 Manual.Pages.Installation}
+
+{include 1 Manual.Pages.RiskKernels}
