@@ -639,6 +639,7 @@ theorem integral_score_eq_zero {Ω E : Type*} {mΩ : MeasurableSpace Ω} [AddCom
     [l.NeBot] (hzero : Tendsto Prod.fst l (𝓝[≠] 0)) (hh : Tendsto Prod.snd l (𝓝 h))
     (he : ∀ᶠ p in l, θ + p.1 • p.2 ∈ s) :
     ∫ ω, A h ω ∂P θ = 0 := by
+-- ANCHOR_END: integralScoreEqZeroSig
   refine tendsto_nhds_unique (zero_add (∫ ω, A h ω ∂P θ) ▸
     (tendsto_zero hA hθ hprob hs (tendsto_nhds_of_tendsto_nhdsWithin hzero) hh he).add
     (tendsto_integral_score hA hθ hprob hs hzero hh he)) ?_
