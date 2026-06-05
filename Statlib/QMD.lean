@@ -631,7 +631,6 @@ private lemma Lp.integrable_sqrt_rnDeriv_sub_sqrt_rnDeriv_sub_const_mul_mul_sqrt
 
 /-- **Mean zero score** for a Hadamard quadratic mean derivative. -/
 -- ANCHOR: integralScoreEqZero
--- ANCHOR: integralScoreEqZeroSig
 theorem integral_score_eq_zero {Ω E : Type*} {mΩ : MeasurableSpace Ω} [AddCommMonoid E]
     [Module ℝ E] [TopologicalSpace E] {P : E → Measure Ω} {μ : Measure Ω} [SigmaFinite μ]
     {s : Set E} {θ h : E} {A : E →ₗ[ℝ] (Ω →₂[P θ] ℝ)}
@@ -640,7 +639,6 @@ theorem integral_score_eq_zero {Ω E : Type*} {mΩ : MeasurableSpace Ω} [AddCom
     [l.NeBot] (hzero : Tendsto Prod.fst l (𝓝[≠] 0)) (hh : Tendsto Prod.snd l (𝓝 h))
     (he : ∀ᶠ p in l, θ + p.1 • p.2 ∈ s) :
     ∫ ω, A h ω ∂P θ = 0 := by
--- ANCHOR_END: integralScoreEqZeroSig
   refine tendsto_nhds_unique (zero_add (∫ ω, A h ω ∂P θ) ▸
     (tendsto_zero hA hθ hprob hs (tendsto_nhds_of_tendsto_nhdsWithin hzero) hh he).add
     (tendsto_integral_score hA hθ hprob hs hzero hh he)) ?_
