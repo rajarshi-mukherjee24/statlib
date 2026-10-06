@@ -111,8 +111,8 @@ lemma errSum_eq_lintegral_cost (P Q : Measure Ω) [IsProbabilityMeasure P] [IsPr
   have hT1 : Measurable (fun ω => 1 - T ω) := measurable_const.sub hT
   rw [errSum, ← lintegral_rnDeriv_mul hP hT.aemeasurable,
     ← lintegral_rnDeriv_mul hQ hT1.aemeasurable,
-    ← lintegral_const_mul t (hq.mul hT1),
-    ← lintegral_add_left (hp.mul hT)]
+    ← lintegral_const_mul (f := fun ω => Q.rnDeriv (P + Q) ω * (1 - T ω)) t (hq.mul hT1),
+    ← lintegral_add_left (f := fun ω => P.rnDeriv (P + Q) ω * T ω) (hp.mul hT)]
   rfl
 
 /-- **Neyman–Pearson lemma for the sum of errors.** The likelihood-ratio test
