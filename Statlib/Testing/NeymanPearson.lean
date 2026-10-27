@@ -10,11 +10,6 @@ public import Statlib.Testing.Basic
 /-!
 # The Neyman–Pearson lemma for the sum of errors
 
-For probability measures `P, Q`, the likelihood-ratio test minimizes the weighted
-sum of errors `∫⁻ T dP + t · ∫⁻ (1 - T) dQ` over all measurable tests
-`T : Ω → [0,1]`. Working over `μ = P + Q` with `p = dP/dμ`, `q = dQ/dμ`, comparing
-`p` with `t·q` removes the auxiliary constant `γ`: the boundary set becomes
-`{p = t q}`, avoiding division entirely.
 
 ## Main definitions
 
@@ -40,7 +35,7 @@ variable {Ω : Type*} [MeasurableSpace Ω]
 noncomputable def errSum (P Q : Measure Ω) (t : ℝ≥0∞) (T : Ω → ℝ≥0∞) : ℝ≥0∞ :=
   (∫⁻ ω, T ω ∂P) + t * ∫⁻ ω, (1 - T ω) ∂Q
 
-/-- The (likelihood-ratio) Neyman–Pearson test with dominating measure `μ = P + Q`,
+/-- Likelihood ratio version of NP test with dominating measure `μ = P + Q`,
 threshold `t` and randomization `η` on the boundary: `1` where `p < t·q`, `η` where
 `p = t·q`, and `0` where `p > t·q`. -/
 noncomputable def npTest (P Q : Measure Ω) (t η : ℝ≥0∞) : Ω → ℝ≥0∞ := fun ω =>
@@ -77,7 +72,7 @@ private lemma cost_eq_le (p q t η x' : ℝ≥0∞) (hη : η ≤ 1) (hx' : x' �
       _ = t * q := by rw [add_tsub_cancel_of_le hy, one_mul]
   rw [e η hη, e x' hx']
 
-/-- The Neyman–Pearson test is measurable. -/
+/-- The Neyman–Pearson test is measurable. This might be overkill the way proof is written. -/
 lemma measurable_npTest (P Q : Measure Ω) (t η : ℝ≥0∞) : Measurable (npTest P Q t η) := by
   have hp := Measure.measurable_rnDeriv P (P + Q)
   have hq := Measure.measurable_rnDeriv Q (P + Q)
@@ -159,7 +154,8 @@ theorem npTest_isMinimizer (P Q : Measure Ω) [IsProbabilityMeasure P] [IsProbab
 decomposition of `Q` with respect to `P` (`Q.rnDeriv P`) — no common dominating
 measure. On the mutually-a.c. region this agrees with the density ratio `q/p`
 (Strasser Example 1.4); the `npTest` proof below works over the `P+Q`
-representation of the same object. -/
+representation of the same object. Here we are trying to see if choices of dominating
+measure matters -- but can be streamlined -/
 noncomputable def lrStat (P Q : Measure Ω) : Ω → ℝ≥0∞ := Q.rnDeriv P
 
 /-- The randomised **threshold test**, bundled as a `Test` via `npTest`. -/
